@@ -1,0 +1,9 @@
+---
+layout: null
+---
+User-agent: *
+Disallow: /admin/
+Disallow: /scripts/
+Disallow: /_data/
+
+Sitemap: {{ site.url }}{{ site.baseurl }}/sitemap.xml

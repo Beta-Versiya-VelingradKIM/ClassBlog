@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="{{ '/assets/styles/global/nav.css' | relative_url}}" />
+<nav id="nav" class="horizontal_container inherit_size shadow border">
+    <a href="{{ '/' | relative_url}}" class="button" id="nav-home" data-id="home">
+        <img id="nav-home-icon">
+        <p>Blog</p>
+    </a>
+    <div>
+        <input id="nav-search-field" type="text" placeholder="Search">
+        <button id="nav-search-button" data-id="search" onclick="nav_search()" class="button">
+            <img id="nav-search-icon">
+        </button>
+        <label>
+            <!-- Added parentheses so the function triggers correctly -->
+            <input id="nav-deep-search" type="checkbox" onchange="nav_deep()">
+            Deep Search
+        </label>
+        <span id="nav-warn" style="display: none;">This will download the text of all posts!</span>
+        <script>
+            const input = document.getElementById("nav-search-field");
+            const deepCheckbox = document.getElementById("nav-deep-search");
+            const baseUrl = "{{ '/search.html' | relative_url }}";
+            const warn = document.getElementById("nav-warn");
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const search = urlParams.get('q');
+
+            if (search) input.value = search;
+
+            if (urlParams.has('d')) {
+                deepCheckbox.checked = true;
+                warn.style.display = "inline";
+            }
+
+            function nav_search() {
+                if (input && input.value.trim() !== "") {
+                    let targetUrl = baseUrl + "?q=" + encodeURIComponent(input.value);
+                    if (deepCheckbox && deepCheckbox.checked) targetUrl += "&d";
+                    window.location.href = targetUrl;
+                }
+            }
+
+            function nav_deep() {
+                warn.style.display = deepCheckbox.checked ? "inline" : "none";
+            }
+        </script>
+    </div>
+    <button id="theme-switch" onclick="nav_theme_switch()" class="button">
+        <img id="theme-swich-icon">
+    </button>
+    <script>
+        let currentTheme = "light";
+        document.addEventListener("DOMContentLoaded", function () {
+            currentTheme = window.SETTINGS["theme"];
+            document.documentElement.setAttribute("data-theme", currentTheme);
+        });
+
+        function nav_theme_switch() {
+            currentTheme = currentTheme === "light" ? "dark" : "light";
+
+            window.SETTINGS["theme"] = currentTheme;
+
+            document.documentElement.setAttribute("data-theme", currentTheme);
+            /*
+            if (typeof window.setSettingsCookie === "function") {
+                window.setSettingsCookie(window.SETTINGS);
+            }
+            */
+        }
+    </script>
+</nav>

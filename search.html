@@ -1,0 +1,90 @@
+---
+layout: default
+title: Search Results
+id: search
+---
+
+<!--! DRAFT !-->
+
+<link rel="stylesheet" href="{{ '/assets/styles/global/element_classes.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/styles/pages/home.css' | relative_url }}">
+
+<div class="post_list" id="search-results-container">
+    <h2 id="search-heading" style="margin-bottom: 20px;">Searching...</h2>
+    <div id="results-list" class="post_list"></div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('q');
+        const isDeepSearch = urlParams.has('d');
+
+        const heading = document.getElementById("search-heading");
+        const resultsList = document.getElementById("results-list");
+
+        if (!query) {
+            heading.textContent = "Please enter a search term.";
+            return;
+        }
+
+        heading.textContent = `Search Results for "${query}" ${isDeepSearch ? "(Deep Search)" : ""}`;
+
+        try {
+            // 1. Fetch posts.json
+            const postsRes = await fetch("{{ '/_data/posts.json' | relative_url }}");
+            if (!postsRes.ok) throw new Error("Failed to load search index.");
+            let posts = await postsRes.json();
+
+            // 2. Conditionally fetch posts.deep.json ONLY if ?d exists
+            if (isDeepSearch) {
+                const deepRes = await fetch("{{ '/_data/posts.deep.json' | relative_url }}");
+                if (deepRes.ok) {
+                    const deepContent = await deepRes.json();
+                    posts = posts.map((post, index) => ({
+                        ...post,
+                        content: deepContent[index] || ""
+                    }));
+                }
+            }
+
+            const lowerQuery = query.toLowerCase();
+
+            // 3. Filter posts
+            const matches = posts.filter(post => {
+                const titleMatch = post.title && post.title.toLowerCase().includes(lowerQuery);
+                const excerptMatch = post.excerpt && post.excerpt.toLowerCase().includes(lowerQuery);
+                const contentMatch = isDeepSearch && post.content && post.content.toLowerCase().includes(lowerQuery);
+
+                return titleMatch || excerptMatch || contentMatch;
+            });
+
+            if (matches.length === 0) {
+                resultsList.innerHTML = `<p>No matching posts found.</p>`;
+                return;
+            }
+
+            // 4. Render results
+            let html = "";
+            matches.forEach(post => {
+                html += `
+                <article class="post-item">
+                    <a
+                    href="${post.url}"
+                    class="post-card-link"
+                    style="--bg: ${post.cardColor}; background-color: var(--bg); background-image: url('${post.cardImage}');">
+                        <h3 class="title">${post.title}</h3>
+                        <p class="summary">${(post.summary || post.excerpt || "").replace(/<[^>]*>/g, "").split(/\s+/).slice(0, 25).join(" ")}</p>
+                        <p class="date">${new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "2-digit", year: "numeric" })}</p>
+                    </a>
+                </article>
+            `;
+            });
+            resultsList.innerHTML = html;
+
+        } catch (error) {
+            console.error(error);
+            heading.textContent = "An error occurred while performing the search.";
+        }
+    });
+</script>

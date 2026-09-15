@@ -1,0 +1,22 @@
+# Site
+title: Class Blog
+author: Beta Versiya KIM Class Projects
+description: Class Blog
+version: "1.0.0"
+favicon: /assets/icons/favicon.png
+
+# Copyright
+copyr_year: 2026
+copyr_license: "Apache 2.0"
+
+# Jekyll
+baseurl: "/ClassBlog"
+url: "https://beta-versiya-kim-class-projects.github.io/"
+markdown: kramdown
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+
+# Files
+include:
+  - _data

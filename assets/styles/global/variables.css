@@ -1,0 +1,53 @@
+:root {
+    --background: #fff;
+
+    --about-background: #fff;
+    --content-background: #fff;
+    --post-card-background: #fff;
+
+    --text-color: #000;
+    --link-color: #0af;
+    --nav-select-color: #0005;
+
+    --border: 1px solid #00000046;
+    --box-shadow: 0 4px 6px #00000046;
+
+    --shadow-color: #00000046;
+    --shadow: 15px 15px 12px var(--shadow-color);
+
+    --about-width: 300px;
+    --about-visibility: visible;
+
+    /*
+    nav
+    */
+    --nav-background: #fff;
+    --home-icon: url("../../icons/home.svg");
+    --search-icon: url("../../icons/search.png");
+    --theme-icon: url("../../icons/sun.png");
+
+    --nav-home-icon-size: 30px;
+    --nav-search-icon-size: 25px;
+    --nav-theme-icon-size: 35px;
+    --nav-home-font-size: 24px;
+    --nav-home-font-color: #50aaaa;
+    --nav-warning-color: #e67e22;
+}
+
+:root[data-theme="dark"] {
+    --background: #444;
+
+    --about-background: #444;
+    --content-background: #444;
+    --post-card-background: #444;
+
+    --text-color: #fff;
+
+    /*
+    nav
+    */
+    --nav-background: var(--background);
+    --home-icon: url("../../icons/home_fd.svg");
+    --search-icon: url("../../icons/search_fd.png");
+    --theme-icon: url("../../icons/moon.png");
+}

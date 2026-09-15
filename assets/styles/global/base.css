@@ -1,0 +1,43 @@
+* {
+    box-sizing: border-box;
+    color: var(--text-color);
+}
+
+a {
+    color: var(--link-color);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 10px;
+    margin: 0;
+    background-color: var(--background);
+    background-image: var(--background-image);
+}
+
+header,
+footer {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    min-height: 55px;
+    margin: 10px;
+    align-items: center;
+}
+
+nav {
+    flex-grow: 1;
+    width: 100%;
+}
+
+main {
+    flex-grow: 1;
+    margin: 10px;
+}
+
+div {
+    align-self: center;
+    text-align: center;
+}

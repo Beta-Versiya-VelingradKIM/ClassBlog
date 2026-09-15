@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+backend:
+  name: github
+  repo: Beta-Versiya-VelingradKIM/ClassBlog
+  base_url: https://github.com
+  auth_endpoint: /external-auth-proxy
+
+media_folder: assets/icons
+public_folder: /assets/icons
+
+collections:
+  - name: posts
+    label: Posts
+    label_singular: Post
+    folder: _posts
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: Layout, name: layout, widget: hidden, default: post }
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime, format: "YYYY-MM-DD" }
+      - label: "Card Settings"
+        name: "card"
+        widget: object
+        preview: false
+        fields:
+          - { label: "Background Color", name: "color", widget: color, default: "#ffffff" }
+          - { label: "Icon/Image", name: "image", widget: image, required: false }
+      - { label: Summary, name: summary, widget: string }
+      - { label: Body, name: body, widget: richtext }

@@ -1,0 +1,28 @@
+.horizontal_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 20px;
+    align-items: center;
+}
+
+.vertical_container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 20px;
+    align-items: center;
+}
+
+.inherit_size {
+    width: inherit;
+    height: inherit;
+}
+
+.shadow {
+    box-shadow: var(--shadow);
+}
+
+.border {
+    border: var(--border);
+}

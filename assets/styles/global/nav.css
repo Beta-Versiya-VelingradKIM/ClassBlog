@@ -1,0 +1,90 @@
+#nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    overflow: hidden;
+}
+
+#nav>* {
+    flex-shrink: 1;
+}
+
+#nav-home p {
+    margin: 0;
+}
+
+#nav div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+
+#nav .button {
+    display: inline-flex;
+    height: 32px;
+    width: 32px;
+    min-width: 32px;
+    background-size: 50%;
+    /* Scales the icon down nicely inside the button */
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+#nav-search-field {
+    height: 32px;
+    padding: 0 10px;
+    border-radius: 4px;
+    outline: none;
+}
+
+#nav-home {
+    display: block;
+    font-size: var(--nav-home-font-size);
+    color: var(--nav-home-font-color);
+    align-items: center;
+    width: fit-content !important;
+}
+
+#nav-home-icon {
+    content: var(--home-icon);
+    width: var(--nav-home-icon-size);
+    height: auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+}
+
+#nav-search-icon {
+    content: var(--search-icon);
+    width: var(--nav-search-icon-size);
+    height: auto;
+}
+
+#nav-warn {
+    font-size: 0.75rem;
+    color: var(--nav-warning-color);
+    font-style: italic;
+    white-space: nowrap;
+}
+
+
+#theme-swich-icon {
+    content: var(--theme-icon);
+    width: var(--nav-theme-icon-size);
+    height: auto;
+}
+
+/* TEMP */
+#nav-search-field {
+    color: #000 !important;
+}

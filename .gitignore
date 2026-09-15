@@ -1,0 +1,25 @@
+# System & Editor Directories
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local Configurations & Secrets
+.env
+.local/
+**/*.local
+**/*.local.*
+
+# Jekyll & Ruby Build Artifacts
+.jekyll-cache/
+.jekyll-metadata
+_site/
+vendor/
+.bundle/
+
+# Test Artifacts
+.fake
+
+# Posts (Ignore post content, keep directory via .gitkeep)
+_posts/*
+!_posts/.gitkeep

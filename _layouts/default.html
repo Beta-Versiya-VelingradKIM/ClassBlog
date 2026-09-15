@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-id="{{ page.id }}">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="{{ site.favicon | relative_url }}">
+        <title>{{ page.title }} | {{ site.title }}</title>
+
+        <!-- Global Veriables -->
+        {% include global/styles.html %}
+
+        <!-- General Classe-->
+        <link rel="stylesheet" href="{{ '/assets/styles/global/general_classes.css' | relative_url }}">
+        <link rel="stylesheet" href="{{ '/assets/styles/global/element_classes.css' | relative_url }}">
+
+        <!-- Default/Desktop -->
+        <link rel="stylesheet" href="{{ '/assets/styles/layouts/default.css' | relative_url }}">
+
+        <!-- Scripts -->
+        {% include global/scripts.html %}
+    </head>
+
+    <body>
+
+        <header>
+            {% include nav.html %}
+        </header>
+
+        <main class="horizontal_container">
+            <!-- About -->
+            <div id="about" class="inherit_size vertical_container shadow border">
+                {% include about_sp.html %}
+            </div>
+
+            <!-- Content -->
+            <div id="content" class="inherit_size shadow border">{{content}}</div>
+        </main>
+
+        {% include footer.html %}
+
+    </body>
+
+</html>
