@@ -46,3 +46,11 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Print Deployed Site URL
+        run: |
+          echo "========================================="
+          echo " Site live at: ${{ steps.deployment.outputs.page_url }}"
+          echo "========================================="
+          echo "### Deployed Site URL :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "[${{ steps.deployment.outputs.page_url }}](${{ steps.deployment.outputs.page_url }})" >> $GITHUB_STEP_SUMMARY
