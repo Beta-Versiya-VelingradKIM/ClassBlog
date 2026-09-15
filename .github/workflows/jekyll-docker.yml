@@ -1,8 +1,10 @@
-name: Deploy Jekyll site to Pages
+name: Jekyll site CI/CD
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
@@ -18,19 +20,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout source code
         uses: actions/checkout@v4
-      - name: Build with Docker
+
+      - name: Build site in jekyll/builder container
         run: |
           docker run \
-          -v ${{ github.workspace }}:/srv/jekyll \
-          jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build"
-      - name: Upload artifact
+            -v ${{ github.workspace }}:/srv/jekyll \
+            jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && bundle install && jekyll build"
+
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./_site
 
   deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
