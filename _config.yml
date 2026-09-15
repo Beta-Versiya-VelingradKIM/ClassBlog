@@ -20,3 +20,4 @@ plugins:
 # Files
 include:
   - _data
+  - scripts
