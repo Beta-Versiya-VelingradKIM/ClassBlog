@@ -27,7 +27,7 @@ jobs:
         run: |
           docker run \
             -v ${{ github.workspace }}:/srv/jekyll \
-            jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && bundle install && jekyll build"
+            jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && bundle install && bundle exec jekyll build"
 
       - name: Upload Pages artifact
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
