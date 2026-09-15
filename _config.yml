@@ -11,7 +11,7 @@ copyr_license: "Apache 2.0"
 
 # Jekyll
 baseurl: "/ClassBlog"
-url: "https://beta-versiya-kim-class-projects.github.io/"
+url: "https://beta-versiya-velingradkim.github.io/"
 markdown: kramdown
 plugins:
   - jekyll-paginate
