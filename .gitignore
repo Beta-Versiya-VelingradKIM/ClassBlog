@@ -10,6 +10,24 @@ Thumbs.db
 **/*.local
 **/*.local.*
 
+# Act & Local CI Tooling
+.actrc
+.act.env
+.act/
+.cache/act/
+act.log
+start_act
+Makefile
+
+# Build & Makefile Artifacts
+*.so
+*.o
+*.a
+*.out
+build/
+bin/out/
+bin
+
 # Jekyll & Ruby Build Artifacts
 .jekyll-cache/
 .jekyll-metadata
